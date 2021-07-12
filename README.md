@@ -43,7 +43,7 @@ Base GitHub App
 - [x] Supports documenting work as issue
 
 Enhancements
-- [ ] GitHub Action workflow(s) for testing, packaging, and publishing container image and Ruby gem
+- [x] GitHub Action workflow(s) for testing, packaging, and publishing container image and Ruby gem
 - [ ] Documentation around installing releases
 - [ ] Supports arbitrary default branch names  _(bug in repository create payload on default branch name)_
 - [ ] Supports use cases repository does not support branch protection rules  _(GitHub Free plan only supports on public repositories)_

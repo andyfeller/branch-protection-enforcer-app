@@ -1,13 +1,5 @@
 # Branch Protection Enforcer App
 
-* [Challenge](#challenge)
-* [Demo](#demo)
-* [Quickstart](#quickstart)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [Known Limitations](#known-limitations)
-* [Troubleshooting](#troubleshooting)
-
 ## Challenge
 
 > "I need my people capable of creating GitHub repositories with minimal controls in place, but I can't give them `admin` permission."
@@ -117,7 +109,7 @@ Example of GitHub issue documenting branch protection rule created
    $ docker run -d -it -v "$PWD"/.env:/app/.env -p 3000:3000 ghcr.io/andyfeller/branch-protection-enforcer-app:latest
    ```
 
-1. **Install the app on your account**
+1. **Install the app on your organization**
 
    For development purposes, you should install the developer GitHub App on your personal GitHub organization
    ![Installing developer GitHub App on personal organization](docs/contributing/developer_github_app_install.png)
@@ -127,9 +119,9 @@ Example of GitHub issue documenting branch protection rule created
 
 1. **Create new repository and verify it works**
 
-   ![Demo creating new repository](docs/contributing/demo_new_repo.png)
-   ![Demo new repository issues](docs/contributing/demo_new_repo_issues.png)
-   ![Demo new repository issue describing branch protection rule created](docs/demo_new_repo_issue.png)
+   ![Demo creating new repository](docs/demo_new_repo.png)<br />
+   ![Demo new repository issues](docs/demo_new_repo_issues.png)<br />
+   ![Demo new repository issue describing branch protection rule created](docs/demo_new_repo_issue.png)<br />
    ![Demo new repository branch protection rule](docs/demo_new_repo_branch_protection.png)
 
 [Back to the top](#branch-protection-enforcer-app)

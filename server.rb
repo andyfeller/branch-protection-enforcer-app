@@ -58,7 +58,7 @@ class GHAapp < Sinatra::Application
       return unless branch_protection.nil?
 
       @installation_client.protect_branch(repo, default_branch, {
-        :accept => Octokit::Preview::PREVIEW_TYPES[branch_protection],
+        :accept => Octokit::Preview::PREVIEW_TYPES[:branch_protection],
         :enforce_admins => true,
         :required_pull_request_reviews => {
           :dismiss_stale_reviews => true,

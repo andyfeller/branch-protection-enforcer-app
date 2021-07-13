@@ -1,12 +1,5 @@
 # Branch Protection Enforcer App
 
-* [Challenge](#challenge)
-* [Demo](#demo)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [Known Limitations](#known-limitations)
-* [Troubleshooting](#troubleshooting)
-
 ## Challenge
 
 > "I need my people capable of creating GitHub repositories with minimal controls in place, but I can't give them `admin` permission."
@@ -32,6 +25,104 @@ Example of GitHub branch protection rule created immediately after repository cr
 
 Example of GitHub issue documenting branch protection rule created
 ![Issue created letting the repository creator know branch protection rule created](docs/demo_new_repo_issue.png)
+
+[Back to the top](#branch-protection-enforcer-app)
+
+## Quickstart
+
+1. **Setup Smee client for proxying GitHub App webhook events**
+
+   ```shell
+   $ npm install --global smee-client
+   $ smee --path /event_handler --port 3000
+   ```
+
+   noting the Smee channel url generated:
+
+   ```
+   Forwarding https://smee.io/XXXXXX#XXXX#XXXX to http://127.0.0.1:3000/event_handler
+   Connected https://smee.io/XXXXXX#XXXX#XXXX
+   ```
+
+1. **Register a new GitHub App**
+
+   Navigate to the [Register new GitHub App](https://github.com/settings/apps/new)  _(from **New GitHub App** button on [GitHub > Developer Settings > GitHub Apps](https://github.com/settings/apps) screen)_ and provide the following information:
+
+   * **GitHub App name**<br />
+     _Set this to something like "branch-protection-enforcer-dev-USERNAME"; allow you and others in your organization to develop simultaneously_
+
+   * **Homepage URL**<br />
+     _Set this to the Smee channel URL; https://smee.io/XXXXXX#XXXX#XXXX_
+
+   * **Webhook URL**<br />
+     _Set this to the Smee channel URL; https://smee.io/XXXXXX#XXXX#XXXX_
+
+   * **Webhook secret**<br />
+     _Set this to something random to ensure webhook events are likely coming from GitHub_
+
+   * **Repository permissions**<br />
+     _Select the following permissions for the GitHub App to request when installed_
+
+     * **Administration**: Read & write
+     * **Issues**: Read & write
+
+   * **Subscribe to events**<br />
+     _Select the following events for the GitHub App to receive when installed_
+
+     * **Repositories**
+
+   * **Where can this GitHub App be installed?**<br />
+     _Set this to "Only on this account"_
+
+   What this form would look like with some of the extraneous permissions removed:<br />
+   ![Trimmed view of new GitHub App form with relevant fields](docs/contributing/developer_github_new_app_settings.png)
+
+1. **Use GitHub App private key and App ID to generate `.env` configuration**
+
+   With the newly created developer GitHub App, we need to generate the necessary private key along with the app ID for our developer environment to authenticate.<br />
+   ![Recently created developer GitHub App](docs/contributing/developer_github_new_app_ready.png)
+
+   Clicking link in header jumps down to the Private keys section<br />
+   ![Generating private key triggers a file download containing private key](docs/contributing/developer_github_new_app_key.png)
+
+   1. Create `.env` file in root of repository based on `.env-example`
+
+      ```shell
+      $ cp .env-example .env
+      ```
+
+   1. Customize `.env` file based upon information from developer GitHub App information
+
+      ```
+      GITHUB_APP_IDENTIFIER=#####
+
+      GITHUB_PRIVATE_KEY="-----BEGIN RSA PRIVATE KEY-----
+      ... file contents from generating private key ...
+      -----END RSA PRIVATE KEY-----"
+
+      GITHUB_WEBHOOK_SECRET=... random value entered when creating developer GitHub App ...
+      ```
+
+1. **Start the server**
+
+   ```shell
+   $ docker run -d -it -v "$PWD"/.env:/app/.env -p 3000:3000 ghcr.io/andyfeller/branch-protection-enforcer-app:latest
+   ```
+
+1. **Install the app on your organization**
+
+   For development purposes, you should install the developer GitHub App on your personal GitHub organization
+   ![Installing developer GitHub App on personal organization](docs/contributing/developer_github_app_install.png)
+
+   Confirmation of the permissions we selected when we initially registered the developer GitHub App
+   ![Confirmation of permissions being granted to installation](docs/contributing/developer_github_app_install_confirm.png)
+
+1. **Create new repository and verify it works**
+
+   ![Demo creating new repository](docs/demo_new_repo.png)<br />
+   ![Demo new repository issues](docs/demo_new_repo_issues.png)<br />
+   ![Demo new repository issue describing branch protection rule created](docs/demo_new_repo_issue.png)<br />
+   ![Demo new repository branch protection rule](docs/demo_new_repo_branch_protection.png)
 
 [Back to the top](#branch-protection-enforcer-app)
 

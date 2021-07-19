@@ -4,13 +4,13 @@
 
 > "I need my people capable of creating GitHub repositories with minimal controls in place, but I can't give them `admin` permission."
 
-For any company with regulatory controls around how the build and deliver products, there is a real challenge of how to make it easy for their developers to be productive with the minimal necessary controls in place.
+For any company with regulatory controls around how they build and deliver products, there is a real challenge of how to make it easy for their developers to be productive with the minimal necessary controls in place.
 
 * [IT General Control](https://en.wikipedia.org/wiki/ITGC)
 * [Sarbanes Oxley](https://en.wikipedia.org/wiki/Sarbanes%E2%80%93Oxley_Act#Sarbanes%E2%80%93Oxley_Section_404:_Assessment_of_internal_control)
 * [Secure Software Development Life Cycle](https://en.wikipedia.org/wiki/Software_development_security), etc.
 
-The Branch Protection Enforcer App project is a GitHub App installed for a GitHub organization with a simple purpose:
+The Branch Protection Enforcer App project is a GitHub App you can setup and install within your GitHub organization with a simple purpose:
 
 1. Watch for newly created repositories
 1. Create branch protection rule for the default branch
